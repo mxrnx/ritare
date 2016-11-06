@@ -1,0 +1,2 @@
+# rita
+Simple oekaki applet
