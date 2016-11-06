@@ -23,13 +23,14 @@ Here is a really professional test image, drawn with this very piece of software
 	<body>
 		<div id="painter">
 			<script type="text/javascript">
-			Ritare.start({
-				parentel: "painter",
-				onFinish: function(e) {
-					window.open(Ritare.canvas.toDataURL('image/png'))
-				},
-				width:600,
-				height:300});
+				Ritare.start({
+					parentel: "painter",
+					onFinish: function(e) {
+						window.open(Ritare.canvas.toDataURL('image/png'))
+					},
+					width:600,
+					height:300
+				});
 			</script>
 		</div>
 	</body>
