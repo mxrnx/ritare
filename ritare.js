@@ -30,6 +30,8 @@ var Ritare = {
 
 		// Prepare context
 		this.context = this.canvas.getContext("2d");
+		this.context.fillStyle = "#fff";
+		this.context.fillRect(0,0,options.width,options.height);
 
 		// Prepare width select field
 		this.widthselect = document.createElement("input");
