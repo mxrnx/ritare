@@ -1,0 +1,29 @@
+#ritare-canvas {
+	border-style:solid;
+	border-color:black;
+	float:left;
+	clear:none;
+}
+
+#selectors {
+	float:right;
+	clear:right;
+}
+
+#selectors input {
+	float:right;
+}
+
+#ritare button {
+	float:right;
+	clear:right;
+}
+
+#widthselect {
+	clear:right;
+	float:right;
+}
+
+#ritare input {
+	width:40px;
+}
