@@ -24,7 +24,7 @@ var Ritare = {
 	colors: [0,0,0],
 	mouseX: null,
 	mouseY: null,
-	width: 1,
+	width: 3,
 	paint: null,
 	start: function(options) {
 		var controlwidth = 134;
@@ -72,7 +72,7 @@ var Ritare = {
 		this.redselect.type = 'number';
 		this.redselect.min = '0';
 		this.redselect.max = '255';
-		this.redselect.value = this.width;
+		this.redselect.value = this.colors[0];
 		this.redselect.style.background = 'red';
 		this.selectors.appendChild(this.redselect);
 		this.redselect.addEventListener("change", (function(e){
@@ -82,7 +82,7 @@ var Ritare = {
 		this.greenselect.type = 'number';
 		this.greenselect.min = '0';
 		this.greenselect.max = '255';
-		this.greenselect.value = this.width;
+		this.greenselect.value = this.colors[1];
 		this.greenselect.style.background = 'green';
 		this.selectors.appendChild(this.greenselect);
 		this.greenselect.addEventListener("change", (function(e){
@@ -92,7 +92,7 @@ var Ritare = {
 		this.blueselect.type = 'number';
 		this.blueselect.min = '0';
 		this.blueselect.max = '255';
-		this.blueselect.value = this.width;
+		this.blueselect.value = this.colors[2];
 		this.blueselect.style.background = 'blue';
 		this.selectors.appendChild(this.blueselect);
 		this.blueselect.addEventListener("change", (function(e){
