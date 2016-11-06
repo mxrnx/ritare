@@ -12,7 +12,8 @@
 }
 
 #selectors input {
-	float:right;
+	float:left;
+	color:white;
 }
 
 #ritare button {
@@ -25,6 +26,20 @@
 	float:right;
 }
 
-#ritare input {
-	width:40px;
+#ritare input[type="number"] {
+	width:30px;
+	margin:2px;
+	-moz-appearance:textfield;
+}
+
+#ritare input[type="number"]::-webkit-outer-spin-button,
+#ritare input[type="number"]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+}
+
+#ritare span {
+	float:left;
+	margin:2px;
+	margin-left:10px;
+	font-family:sans-serif;
 }

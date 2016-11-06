@@ -27,7 +27,7 @@ var Ritare = {
 	width: 1,
 	paint: null,
 	start: function(options) {
-		var controlwidth = 160;
+		var controlwidth = 134;
 		this.parentel = document.getElementById(options.parentel);
 
 		// Prepare applet
@@ -59,37 +59,44 @@ var Ritare = {
 			Ritare.width = Ritare.widthselect.value;
 		}));
 
+		this.widthlabel = document.createElement("span");
+		this.widthlabel.innerHTML = "Width: ";
+		this.applet.appendChild(this.widthlabel);
+
 		// Prepare color selectors
 		this.selectors = document.createElement("div");
 		this.selectors.id = "selectors";
 		this.applet.appendChild(this.selectors);
 
-		this.blueselect = document.createElement("input");
-		this.blueselect.type = 'number';
-		this.blueselect.min = '0';
-		this.blueselect.max = '255';
-		this.blueselect.value = this.width;
-		this.selectors.appendChild(this.blueselect);
-		this.blueselect.addEventListener("change", (function(e){
-			Ritare.colors[2] = Ritare.blueselect.value;
+		this.redselect = document.createElement("input"); // There must be a better way to add these three fields
+		this.redselect.type = 'number';
+		this.redselect.min = '0';
+		this.redselect.max = '255';
+		this.redselect.value = this.width;
+		this.redselect.style.background = 'red';
+		this.selectors.appendChild(this.redselect);
+		this.redselect.addEventListener("change", (function(e){
+			Ritare.colors[0] = Ritare.redselect.value;
 		}));
 		this.greenselect = document.createElement("input");
 		this.greenselect.type = 'number';
 		this.greenselect.min = '0';
 		this.greenselect.max = '255';
 		this.greenselect.value = this.width;
+		this.greenselect.style.background = 'green';
 		this.selectors.appendChild(this.greenselect);
 		this.greenselect.addEventListener("change", (function(e){
 			Ritare.colors[1] = Ritare.greenselect.value;
 		}));
-		this.redselect = document.createElement("input");
-		this.redselect.type = 'number';
-		this.redselect.min = '0';
-		this.redselect.max = '255';
-		this.redselect.value = this.width;
-		this.selectors.appendChild(this.redselect);
-		this.redselect.addEventListener("change", (function(e){
-			Ritare.colors[0] = Ritare.redselect.value;
+		this.blueselect = document.createElement("input");
+		this.blueselect.type = 'number';
+		this.blueselect.min = '0';
+		this.blueselect.max = '255';
+		this.blueselect.value = this.width;
+		this.blueselect.style.background = 'blue';
+		this.selectors.appendChild(this.blueselect);
+		this.blueselect.addEventListener("change", (function(e){
+			Ritare.colors[2] = Ritare.blueselect.value;
 		}));
 
 		// Prepare finish button
