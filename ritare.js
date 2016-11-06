@@ -120,7 +120,6 @@ var Ritare = {
 			if(Ritare.paint){
 				Ritare.context.fillStyle = "rgba("+Ritare.colors[0]+","+Ritare.colors[1]+","+Ritare.colors[2]+",255)";
 				//Ritare.context.fillRect(Ritare.mouseX, Ritare.mouseY, Ritare.width, Ritare.width);
-				console.log(Ritare.mouseX+';'+Ritare.mouseY);
 				Ritare.context.beginPath();
 				Ritare.context.arc(Ritare.mouseX, Ritare.mouseY, Ritare.width, 0, 2*Math.PI)
 				Ritare.context.fill();
