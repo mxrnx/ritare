@@ -1,6 +1,7 @@
 #ritare-canvas {
 	border-style:solid;
 	border-color:black;
+	border-width:2px;
 	float:left;
 	clear:none;
 }
