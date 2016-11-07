@@ -27,7 +27,6 @@ var Ritare = {
 	width: 3,
 	paint: null,
 	start: function(options) {
-		var controlwidth = 134;
 		this.parentel = document.getElementById(options.parentel);
 
 		// Prepare applet
@@ -40,7 +39,7 @@ var Ritare = {
 		// Prepare canvas
 		this.canvas = document.createElement("canvas");
 		this.canvas.id = 'ritare-canvas';
-		this.canvas.width = options.width - controlwidth;
+		this.canvas.width = options.width;
 		this.canvas.height = options.height;
 		this.applet.appendChild(this.canvas);
 
@@ -50,6 +49,11 @@ var Ritare = {
 		this.context.fillRect(0,0,options.width,options.height);
 
 		// Prepare width select field
+		this.widthlabel = document.createElement("span");
+		this.widthlabel.innerHTML = "W: ";
+		this.widthlabel.id = "widthlabel";
+		this.applet.appendChild(this.widthlabel);
+
 		this.widthselect = document.createElement("input");
 		this.widthselect.type = 'number';
 		this.widthselect.id = 'widthselect';
@@ -59,11 +63,11 @@ var Ritare = {
 			Ritare.width = Ritare.widthselect.value;
 		}));
 
-		this.widthlabel = document.createElement("span");
-		this.widthlabel.innerHTML = "Width: ";
-		this.applet.appendChild(this.widthlabel);
-
 		// Prepare color selectors
+		this.rgblabel = document.createElement("span");
+		this.rgblabel.innerHTML = "RGB: ";
+		this.applet.appendChild(this.rgblabel);
+
 		this.selectors = document.createElement("div");
 		this.selectors.id = "selectors";
 		this.applet.appendChild(this.selectors);
@@ -104,6 +108,7 @@ var Ritare = {
 		this.finishbutton.id = 'ritare-finished';
 		this.finishbutton.type = 'button';
 		this.finishbutton.innerHTML = 'Finished!';
+		this.finishbutton.outerHTML = ' ';
 		this.applet.appendChild(this.finishbutton);
 		this.finishbutton.addEventListener("mousedown", options.onFinish);
 
