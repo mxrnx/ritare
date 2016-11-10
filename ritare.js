@@ -26,6 +26,7 @@ var Ritare = {
 	mouseY: null,
 	width: 3,
 	paint: null,
+	bucketfill: null,
 	start: function(options) {
 		this.parentel = document.getElementById(options.parentel);
 
@@ -102,26 +103,87 @@ var Ritare = {
 		this.blueselect.addEventListener("change", (function(e){
 			Ritare.colors[2] = Ritare.blueselect.value;
 		}));
+		
+		//Prepare bucket fill toggle and label
+		this.buckettoggle = document.createElement("input");
+		this.buckettoggle.id = 'buckettoggle';
+		this.buckettoggle.type = 'checkbox';
+		this.buckettoggle.checked = this.bucketfill;
+		this.bucketlabel = document.createElement("label");
+		this.bucketlabel.htmlFor = 'buckettoggle';
+		this.bucketlabel.appendChild(document.createTextNode('bucket fill'));
+		this.applet.appendChild(this.bucketlabel);
+		this.applet.appendChild(this.buckettoggle);
+		this.buckettoggle.addEventListener("change", (function(e){
+			Ritare.bucketfill = Ritare.buckettoggle.checked;
+		}));
 
 		// Prepare finish button
 		this.finishbutton = document.createElement("button");
 		this.finishbutton.id = 'ritare-finished';
 		this.finishbutton.type = 'button';
 		this.finishbutton.innerHTML = 'Finished!';
-		this.finishbutton.outerHTML = ' ';
+		//this.finishbutton.outerHTML = ' ';
 		this.applet.appendChild(this.finishbutton);
 		this.finishbutton.addEventListener("mousedown", options.onFinish);
 
 		this.canvas.addEventListener("mousedown", (function(e){
-			Ritare.mouseX = e.pageX - Ritare.canvas.offsetLeft;
-			Ritare.mouseY = e.pageY - Ritare.canvas.offsetTop;
-			Ritare.paint = true;
+			Ritare.mouseX = e.pageX - Ritare.canvas.offsetLeft - 2;
+			Ritare.mouseY = e.pageY - Ritare.canvas.offsetTop - 2;
+			if(Ritare.bucketfill){
+				//create a copy of the image's current state for modification
+				var canvas = Ritare.context.getImageData(0, 0, Ritare.canvas.width, Ritare.canvas.height);
+				//create an array of pixels to scan, and a 2d array to see if a pixel has already been scanned
+				var scan = [{x: Ritare.mouseX, y: Ritare.mouseY}];
+				var willscan = [];
+				for(var x = 0; x < Ritare.canvas.width; x++){
+					willscan[x] = new Array(Ritare.canvas.width);
+				}
+				willscan[Ritare.mouseX][Ritare.mouseY] = true;
+				//get color of clicked pixel
+				var target = [];
+				var offset = (Ritare.mouseY * Ritare.canvas.width + Ritare.mouseX) * 4;
+				target[0] = canvas.data[offset];
+				target[1] = canvas.data[offset+1];
+				target[2] = canvas.data[offset+2];
+				//only fill if the selected color is different
+				if(!(target[0] == Ritare.colors[0] && target[1] == Ritare.colors[1] && target[2] == Ritare.colors[2])){
+					var translation = [[1, 0], [0, 1], [-1, 0], [0, -1]];
+					for(var i = 0; i < scan.length; i++){
+						//fill the current pixel
+						var scanned = scan[i];
+						offset = (scanned.y * Ritare.canvas.width + scanned.x) * 4;
+						canvas.data[offset] = Ritare.colors[0];
+						canvas.data[offset+1] = Ritare.colors[1];
+						canvas.data[offset+2] = Ritare.colors[2];
+						//check adjacent pixels
+						for(var j = 0; j < 4; j++){
+							var k = {x: scanned.x + translation[j][0], y: scanned.y + translation[j][1]};
+							//don't go out of bounds
+							if(k.x >= 0 && k.x < Ritare.canvas.width && k.y >= 0 && k.y < Ritare.canvas.height){
+								offset = (k.y * Ritare.canvas.width + k.x) * 4;
+								if(canvas.data[offset] == target[0] && canvas.data[offset+1] == target[1] && canvas.data[offset+2] == target[2]){
+									if(willscan[k.x][k.y] != true){
+										willscan[k.x][k.y] = true;
+										scan.push(k);
+									}
+								}
+							}
+						}
+					}
+				}
+				//write the stored copy back
+				Ritare.context.putImageData(canvas, 0, 0);
+			}
+			else{
+				Ritare.paint = true;
+			}
 		}));
 
 		this.canvas.addEventListener("mousemove", (function(e){
 			offsets = getoffset(Ritare.canvas);
-			Ritare.mouseX = e.pageX - offsets[0];
-			Ritare.mouseY = e.pageY - offsets[1];
+			Ritare.mouseX = e.pageX - offsets[0] - 2;
+			Ritare.mouseY = e.pageY - offsets[1] - 2;
 			if(Ritare.paint){
 				Ritare.context.fillStyle = "rgba("+Ritare.colors[0]+","+Ritare.colors[1]+","+Ritare.colors[2]+",255)";
 				//Ritare.context.fillRect(Ritare.mouseX, Ritare.mouseY, Ritare.width, Ritare.width);
