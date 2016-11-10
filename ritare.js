@@ -123,13 +123,13 @@ var Ritare = {
 		this.finishbutton.id = 'ritare-finished';
 		this.finishbutton.type = 'button';
 		this.finishbutton.innerHTML = 'Finished!';
-		//this.finishbutton.outerHTML = ' ';
 		this.applet.appendChild(this.finishbutton);
 		this.finishbutton.addEventListener("mousedown", options.onFinish);
 
 		this.canvas.addEventListener("mousedown", (function(e){
-			Ritare.mouseX = e.pageX - Ritare.canvas.offsetLeft - 2;
-			Ritare.mouseY = e.pageY - Ritare.canvas.offsetTop - 2;
+			offsets = getoffset(Ritare.canvas);
+			Ritare.mouseX = e.pageX - offsets[0] - 2;
+			Ritare.mouseY = e.pageY - offsets[1] - 2;
 			if(Ritare.bucketfill){
 				//create a copy of the image's current state for modification
 				var canvas = Ritare.context.getImageData(0, 0, Ritare.canvas.width, Ritare.canvas.height);
@@ -181,15 +181,17 @@ var Ritare = {
 		}));
 
 		this.canvas.addEventListener("mousemove", (function(e){
-			offsets = getoffset(Ritare.canvas);
-			Ritare.mouseX = e.pageX - offsets[0] - 2;
-			Ritare.mouseY = e.pageY - offsets[1] - 2;
 			if(Ritare.paint){
-				Ritare.context.fillStyle = "rgba("+Ritare.colors[0]+","+Ritare.colors[1]+","+Ritare.colors[2]+",255)";
-				//Ritare.context.fillRect(Ritare.mouseX, Ritare.mouseY, Ritare.width, Ritare.width);
+				Ritare.context.strokeStyle = "rgba("+Ritare.colors[0]+","+Ritare.colors[1]+","+Ritare.colors[2]+",255)";
+				Ritare.context.lineJoin = "round";
+				Ritare.context.lineWidth = Ritare.width;
 				Ritare.context.beginPath();
-				Ritare.context.arc(Ritare.mouseX, Ritare.mouseY, Ritare.width, 0, 2*Math.PI)
-				Ritare.context.fill();
+				Ritare.context.moveTo(Ritare.mouseX, Ritare.mouseY)
+				offsets = getoffset(Ritare.canvas);
+				Ritare.mouseX = e.pageX - offsets[0] - 2;
+				Ritare.mouseY = e.pageY - offsets[1] - 2;
+				Ritare.context.lineTo(Ritare.mouseX, Ritare.mouseY)
+				Ritare.context.stroke();
 			}
 		}));
 
