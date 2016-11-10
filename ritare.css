@@ -20,6 +20,15 @@
 	margin-left:6px;
 }
 
+#ritare label {
+	margin:3px;
+}
+
+#ritare input[type="checkbox"] {
+	margin:2px;
+	margin-top:5px;
+}
+
 #widthselect {
 	float:left;
 }
