@@ -111,7 +111,7 @@ var Ritare = {
 		this.buckettoggle.checked = this.bucketfill;
 		this.bucketlabel = document.createElement("label");
 		this.bucketlabel.htmlFor = 'buckettoggle';
-		this.bucketlabel.appendChild(document.createTextNode('bucket fill'));
+		this.bucketlabel.appendChild(document.createTextNode('fill'));
 		this.applet.appendChild(this.bucketlabel);
 		this.applet.appendChild(this.buckettoggle);
 		this.buckettoggle.addEventListener("change", (function(e){
