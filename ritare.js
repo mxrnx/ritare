@@ -11,7 +11,7 @@ function getoffset(el) {
 		y += el.offsetTop;
 	}
 
-	return [x, y]
+	return [x, y];
 }
 
 var Ritare = {
@@ -135,11 +135,11 @@ var Ritare = {
 				var canvas = Ritare.context.getImageData(0, 0, Ritare.canvas.width, Ritare.canvas.height);
 				//create an array of pixels to scan, and a 2d array to see if a pixel has already been scanned
 				var scan = [{x: Ritare.mouseX, y: Ritare.mouseY}];
-				var willscan = [];
+				var scanned = [];
 				for(var x = 0; x < Ritare.canvas.width; x++){
-					willscan[x] = new Array(Ritare.canvas.width);
+					scanned[x] = new Array(Ritare.canvas.width);
 				}
-				willscan[Ritare.mouseX][Ritare.mouseY] = true;
+				scanned[Ritare.mouseX][Ritare.mouseY] = true;
 				//get color of clicked pixel
 				var target = [];
 				var offset = (Ritare.mouseY * Ritare.canvas.width + Ritare.mouseX) * 4;
@@ -151,21 +151,28 @@ var Ritare = {
 					var translation = [[1, 0], [0, 1], [-1, 0], [0, -1]];
 					for(var i = 0; i < scan.length; i++){
 						//fill the current pixel
-						var scanned = scan[i];
-						offset = (scanned.y * Ritare.canvas.width + scanned.x) * 4;
+						var current = scan[i];
+						offset = (current.y * Ritare.canvas.width + current.x) * 4;
 						canvas.data[offset] = Ritare.colors[0];
 						canvas.data[offset+1] = Ritare.colors[1];
 						canvas.data[offset+2] = Ritare.colors[2];
 						//check adjacent pixels
 						for(var j = 0; j < 4; j++){
-							var k = {x: scanned.x + translation[j][0], y: scanned.y + translation[j][1]};
+							var k = {x: current.x + translation[j][0], y: current.y + translation[j][1]};
 							//don't go out of bounds
 							if(k.x >= 0 && k.x < Ritare.canvas.width && k.y >= 0 && k.y < Ritare.canvas.height){
 								offset = (k.y * Ritare.canvas.width + k.x) * 4;
-								if(canvas.data[offset] == target[0] && canvas.data[offset+1] == target[1] && canvas.data[offset+2] == target[2]){
-									if(willscan[k.x][k.y] != true){
-										willscan[k.x][k.y] = true;
+								//don't go over a pixel more than once
+								if(scanned[k.x][k.y] != true){
+									scanned[k.x][k.y] = true;
+									if(canvas.data[offset] == target[0] && canvas.data[offset+1] == target[1] && canvas.data[offset+2] == target[2]){
 										scan.push(k);
+									}
+									else{
+										//deal with anti-aliasing
+										canvas.data[offset] = Ritare.colors[0];
+										canvas.data[offset+1] = Ritare.colors[1];
+										canvas.data[offset+2] = Ritare.colors[2];
 									}
 								}
 							}
