@@ -177,6 +177,10 @@ var Ritare = {
 			}
 			else{
 				Ritare.paint = true;
+				Ritare.context.beginPath();
+				Ritare.context.fillStyle = "rgba("+Ritare.colors[0]+","+Ritare.colors[1]+","+Ritare.colors[2]+",255)";
+				Ritare.context.arc(Ritare.mouseX, Ritare.mouseY, Ritare.width/2, 0, 2*Math.PI)
+				Ritare.context.fill();
 			}
 		}));
 
@@ -184,13 +188,14 @@ var Ritare = {
 			if(Ritare.paint){
 				Ritare.context.strokeStyle = "rgba("+Ritare.colors[0]+","+Ritare.colors[1]+","+Ritare.colors[2]+",255)";
 				Ritare.context.lineJoin = "round";
+				Ritare.context.lineCap = "round";
 				Ritare.context.lineWidth = Ritare.width;
 				Ritare.context.beginPath();
 				Ritare.context.moveTo(Ritare.mouseX, Ritare.mouseY)
 				offsets = getoffset(Ritare.canvas);
 				Ritare.mouseX = e.pageX - offsets[0] - 2;
 				Ritare.mouseY = e.pageY - offsets[1] - 2;
-				Ritare.context.lineTo(Ritare.mouseX, Ritare.mouseY)
+				Ritare.context.lineTo(Ritare.mouseX, Ritare.mouseY);
 				Ritare.context.stroke();
 			}
 		}));
