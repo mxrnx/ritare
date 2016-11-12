@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+	<head>
+		<title>ritare</title>
+		<meta charset="utf-8" />
+		<script type="text/javascript" src="ritare.js"></script>
+		<link type="text/css" href="ritare.css" rel="stylesheet" />
+	</head>
+	<body>
+		<h1>Ritare demo</h1>
+		<p>This page is a demo of the ritare oekaki applet, found <a href="https://github.com/knarka/ritare">here</a>. Please note that it may not always be showing the latest version.</p>
+		<p>The finished button of this demo simply gives you a data URL. Note that you can execute any piece of Javascript you want on the finish button.</p>
+		<div id="painter">
+			<script type="text/javascript">
+				Ritare.start({
+					parentel: "painter",
+					onFinish: function(e) {
+						window.open(Ritare.canvas.toDataURL('image/png'))
+					},
+					width:600,
+					height:300
+				});
+			</script>
+		</div>
+	</body>
+</html>
