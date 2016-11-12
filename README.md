@@ -1,6 +1,8 @@
 # ritare
 Simple, pure javascript, no jQuery, oekaki applet. Originally written for [Fikaba](https://github.com/knarka/fikaba).
 
+[Demo page here.](https://knarka.github.io/ritare/)
+
 Here is a really professional test image, drawn with (an older version of) this very piece of software:
 
 ![An awfully drawn image of some awful chinese cartoon characters](https://github.com/knarka/ritare/raw/master/screenshot.png "Yes, it's really bad, I know")
