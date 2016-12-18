@@ -22,6 +22,7 @@ var Ritare = {
 	widthselect: null,
 
 	colors: [0,0,0],
+	color: '#881111',
 	mouseX: null,
 	mouseY: null,
 	width: 3,
@@ -64,46 +65,15 @@ var Ritare = {
 			Ritare.width = Ritare.widthselect.value;
 		}));
 
-		// Prepare color selectors
-		this.rgblabel = document.createElement('span');
-		this.rgblabel.innerHTML = 'RGB: ';
-		this.applet.appendChild(this.rgblabel);
+		// Prepare color picker
+		this.picker = document.createElement('button');
+		this.picker.id = 'picker';
+		this.picker.className = 'jscolor {value:\'' + this.color + '\'}';
+		this.applet.appendChild(this.picker);
+		this.picker.addEventListener('change', (function(jscolor){
+			Ritare.color = "#" + jscolor;
+		}));
 
-		this.selectors = document.createElement('div');
-		this.selectors.id = 'selectors';
-		this.applet.appendChild(this.selectors);
-
-		this.redselect = document.createElement('input'); // There must be a better way to add these three fields
-		this.redselect.type = 'number';
-		this.redselect.min = '0';
-		this.redselect.max = '255';
-		this.redselect.value = this.colors[0];
-		this.redselect.style.background = 'red';
-		this.selectors.appendChild(this.redselect);
-		this.redselect.addEventListener('change', (function(e){
-			Ritare.colors[0] = Ritare.redselect.value;
-		}));
-		this.greenselect = document.createElement('input');
-		this.greenselect.type = 'number';
-		this.greenselect.min = '0';
-		this.greenselect.max = '255';
-		this.greenselect.value = this.colors[1];
-		this.greenselect.style.background = 'green';
-		this.selectors.appendChild(this.greenselect);
-		this.greenselect.addEventListener('change', (function(e){
-			Ritare.colors[1] = Ritare.greenselect.value;
-		}));
-		this.blueselect = document.createElement('input');
-		this.blueselect.type = 'number';
-		this.blueselect.min = '0';
-		this.blueselect.max = '255';
-		this.blueselect.value = this.colors[2];
-		this.blueselect.style.background = 'blue';
-		this.selectors.appendChild(this.blueselect);
-		this.blueselect.addEventListener('change', (function(e){
-			Ritare.colors[2] = Ritare.blueselect.value;
-		}));
-		
 		//Prepare bucket fill toggle and label
 		this.buckettoggle = document.createElement('input');
 		this.buckettoggle.id = 'buckettoggle';
@@ -185,7 +155,7 @@ var Ritare = {
 			else{
 				Ritare.paint = true;
 				Ritare.context.beginPath();
-				Ritare.context.fillStyle = 'rgba('+Ritare.colors[0]+','+Ritare.colors[1]+','+Ritare.colors[2]+',255)';
+				Ritare.context.fillStyle = Ritare.color;
 				Ritare.context.arc(Ritare.mouseX, Ritare.mouseY, Ritare.width/2, 0, 2*Math.PI)
 				Ritare.context.fill();
 			}
@@ -193,7 +163,7 @@ var Ritare = {
 
 		this.canvas.addEventListener('mousemove', (function(e){
 			if(Ritare.paint){
-				Ritare.context.strokeStyle = 'rgba('+Ritare.colors[0]+','+Ritare.colors[1]+','+Ritare.colors[2]+',255)';
+				Ritare.context.strokeStyle = Ritare.color;
 				Ritare.context.lineJoin = 'round';
 				Ritare.context.lineCap = 'round';
 				Ritare.context.lineWidth = Ritare.width;
