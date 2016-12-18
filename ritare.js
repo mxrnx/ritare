@@ -22,7 +22,7 @@ var Ritare = {
 	widthselect: null,
 
 	colors: [0,0,0],
-	color: '#881111',
+	color: '#000000',
 	mouseX: null,
 	mouseY: null,
 	width: 3,
@@ -66,12 +66,13 @@ var Ritare = {
 		}));
 
 		// Prepare color picker
-		this.picker = document.createElement('button');
+		this.picker = document.createElement('input');
 		this.picker.id = 'picker';
 		this.picker.className = 'jscolor {value:\'' + this.color + '\'}';
 		this.applet.appendChild(this.picker);
-		this.picker.addEventListener('change', (function(jscolor){
-			Ritare.color = "#" + jscolor;
+		this.picker.addEventListener('change', (function(){
+			Ritare.color = Ritare.picker.jscolor.toHEXString();
+			Ritare.colors = Ritare.picker.jscolor.rgb;
 		}));
 
 		//Prepare bucket fill toggle and label
