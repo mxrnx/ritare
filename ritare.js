@@ -72,7 +72,9 @@ var Ritare = {
 		this.applet.appendChild(this.picker);
 		this.picker.addEventListener('change', (function(){
 			Ritare.color = Ritare.picker.jscolor.toHEXString();
-			Ritare.colors = Ritare.picker.jscolor.rgb;
+			Ritare.colors = Ritare.picker.jscolor.rgb.map(function(value){
+				return value.toFixed();
+			});
 		}));
 
 		//Prepare bucket fill toggle and label
