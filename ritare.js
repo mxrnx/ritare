@@ -73,7 +73,7 @@ var Ritare = {
 		this.picker.addEventListener('change', (function(){
 			Ritare.color = Ritare.picker.jscolor.toHEXString();
 			Ritare.colors = Ritare.picker.jscolor.rgb.map(function(value){
-				return value.toFixed();
+				return parseInt(value.toFixed());
 			});
 		}));
 
