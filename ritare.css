@@ -45,7 +45,7 @@
 
 #ritare input[type="number"]::-webkit-outer-spin-button,
 #ritare input[type="number"]::-webkit-inner-spin-button {
-	-webkit-appearance: none;
+	-webkit-appearance:none;
 }
 
 #ritare span {
