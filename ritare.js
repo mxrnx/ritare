@@ -14,8 +14,6 @@ function getoffset(el){
 	return [x, y];
 }
 
-
-
 function start(e){
 	offsets = getoffset(Ritare.canvas);
 	if(e.type == 'mousedown'){
