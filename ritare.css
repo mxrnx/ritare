@@ -45,7 +45,7 @@
 
 #ritare input[type="number"]::-webkit-outer-spin-button,
 #ritare input[type="number"]::-webkit-inner-spin-button {
-	-webkit-appearance: none;
+	-webkit-appearance:none;
 }
 
 #ritare span {
@@ -53,4 +53,9 @@
 	margin:3px;
 	margin-left:3px;
 	font-family:sans-serif;
+}
+
+#picker {
+	width:60px;
+	margin-left:3px;
 }
