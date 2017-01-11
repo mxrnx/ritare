@@ -19,6 +19,10 @@ function start(e){
 	if(e.type == 'mousedown'){
 		Ritare.mouseX = e.pageX - offsets[0] - 2;
 		Ritare.mouseY = e.pageY - offsets[1] - 2;
+		if(Ritare.touch == true){
+			Ritare.touch = false;
+			return;
+		}
 		Ritare.touch = false;
 	}
 	else if(e.type == 'touchstart'){
@@ -26,7 +30,7 @@ function start(e){
 		Ritare.mouseY = e.changedTouches[0].pageY - offsets[1] - 2;
 		Ritare.touch = true;
 	}
-	if(Ritare.bucketfill && e.type == 'mousedown'){
+	if(Ritare.bucketfill){
 		//create a copy of the image's current state for modification
 		var canvas = Ritare.context.getImageData(0, 0, Ritare.canvas.width, Ritare.canvas.height);
 		//create an array of pixels to scan, and a 2d array to see if a pixel has already been scanned
