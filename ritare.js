@@ -89,9 +89,6 @@ function start(e){
 
 function move(e){
 	if(Ritare.paint){
-		if(e.type == 'mousemove' && Ritare.touch == false){
-			return;
-		}
 		Ritare.context.strokeStyle = Ritare.color;
 		Ritare.context.lineJoin = 'round';
 		Ritare.context.lineCap = 'round';
@@ -113,9 +110,6 @@ function move(e){
 }
 
 function end(e){
-	if(e.type == 'mousemove' && Ritare.touch == false){
-		return;
-	}
 	Ritare.paint = false;
 }
 
