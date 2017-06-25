@@ -1,7 +1,8 @@
 #ritare-canvas {
 	border-style:solid;
-	border-color:black;
-	border-width:2px;
+	border-color:#333;
+	border-width:1px;
+	border-radius: 3px;
 	float:left;
 	clear:none;
 	margin-bottom:4px;
@@ -39,13 +40,9 @@
 
 #ritare input[type="number"] {
 	width:30px;
+	height: 20px;
 	margin:2px;
-	-moz-appearance:textfield;
-}
-
-#ritare input[type="number"]::-webkit-outer-spin-button,
-#ritare input[type="number"]::-webkit-inner-spin-button {
-	-webkit-appearance:none;
+	
 }
 
 #ritare span {
@@ -55,7 +52,13 @@
 	font-family:sans-serif;
 }
 
+#ritare-finished {
+  float: right;
+}
+
 #picker {
 	width:60px;
+	margin:2px;
 	margin-left:3px;
+	height: 20px;
 }
