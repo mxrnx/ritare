@@ -16,6 +16,8 @@ Here is a really professional test image, drawn with (an older version of) this 
 * You can draw images and stuff
 
 # Usage
+It's necessary that you pull jscolor as well, otherwise your colorpicker will just be an empty text input box. This is easily done: head to the directory ritare is in, and execute `git submodule init; git submodule update`.
+
 ```html
 <!doctype html>
 <html>
