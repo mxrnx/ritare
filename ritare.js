@@ -155,15 +155,11 @@ var Ritare = {
 		this.context.fillRect(0,0,options.width,options.height);
 
 		// Prepare width select field
-		this.widthlabel = document.createElement('span');
-		this.widthlabel.innerHTML = 'W: ';
-		this.widthlabel.id = 'widthlabel';
-		this.applet.appendChild(this.widthlabel);
-
 		this.widthselect = document.createElement('input');
 		this.widthselect.type = 'number';
 		this.widthselect.id = 'widthselect';
 		this.widthselect.value = this.width;
+		this.widthselect.placeholder = 'width';
 		this.applet.appendChild(this.widthselect);
 		this.widthselect.addEventListener('change', (function(e){
 			Ritare.width = Ritare.widthselect.value;
