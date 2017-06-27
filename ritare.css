@@ -1,7 +1,8 @@
 #ritare-canvas {
 	border-style:solid;
-	border-color:black;
-	border-width:2px;
+	border-color:#333;
+	border-width:1px;
+	border-radius: 3px;
 	float:left;
 	clear:none;
 	margin-bottom:4px;
@@ -15,37 +16,13 @@
 	color:white;
 }
 
-#ritare button {
-	clear:right;
-	margin-left:6px;
-}
-
-#ritare label {
-	margin:3px;
-}
-
-#ritare input[type="checkbox"] {
+#toolselection {
 	margin:2px;
-	margin-top:5px;
 }
 
 #widthselect {
-	float:left;
-}
-
-#widthlabel {
-	clear:left;
-}
-
-#ritare input[type="number"] {
 	width:30px;
 	margin:2px;
-	-moz-appearance:textfield;
-}
-
-#ritare input[type="number"]::-webkit-outer-spin-button,
-#ritare input[type="number"]::-webkit-inner-spin-button {
-	-webkit-appearance:none;
 }
 
 #ritare span {
@@ -56,6 +33,11 @@
 }
 
 #picker {
-	width:60px;
+	margin:2px;
 	margin-left:3px;
+}
+
+#ritare-finished {
+	margin:3px;
+	float:right;
 }

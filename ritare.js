@@ -154,16 +154,30 @@ var Ritare = {
 		this.context.fillStyle = '#fff';
 		this.context.fillRect(0,0,options.width,options.height);
 
-		// Prepare width select field
-		this.widthlabel = document.createElement('span');
-		this.widthlabel.innerHTML = 'W: ';
-		this.widthlabel.id = 'widthlabel';
-		this.applet.appendChild(this.widthlabel);
+		//Prepare tool selection
+		this.toolselection = document.createElement('select');
+		this.toolselection.id = 'toolselection';
+		this.applet.appendChild(this.toolselection);
 
+		var tools = ['pencil', 'bucket'];
+		for (var i = 0; i < tools.length; i++){
+			var opt = document.createElement('option');
+			opt.value = tools[i];
+			opt.text = tools[i];
+			this.toolselection.append(opt);
+		}
+
+		this.toolselection.addEventListener('change', (function(e){
+			if (this.selectedIndex == 1) Ritare.bucketfill = true;
+			else Ritare.bucketfill = false;
+		}));
+
+		// Prepare width select field
 		this.widthselect = document.createElement('input');
 		this.widthselect.type = 'number';
 		this.widthselect.id = 'widthselect';
 		this.widthselect.value = this.width;
+		this.widthselect.placeholder = 'width';
 		this.applet.appendChild(this.widthselect);
 		this.widthselect.addEventListener('change', (function(e){
 			Ritare.width = Ritare.widthselect.value;
@@ -179,20 +193,6 @@ var Ritare = {
 			Ritare.colors = Ritare.picker.jscolor.rgb.map(function(value){
 				return parseInt(value.toFixed());
 			});
-		}));
-
-		//Prepare bucket fill toggle and label
-		this.buckettoggle = document.createElement('input');
-		this.buckettoggle.id = 'buckettoggle';
-		this.buckettoggle.type = 'checkbox';
-		this.buckettoggle.checked = this.bucketfill;
-		this.bucketlabel = document.createElement('label');
-		this.bucketlabel.htmlFor = 'buckettoggle';
-		this.bucketlabel.appendChild(document.createTextNode('fill'));
-		this.applet.appendChild(this.bucketlabel);
-		this.applet.appendChild(this.buckettoggle);
-		this.buckettoggle.addEventListener('change', (function(e){
-			Ritare.bucketfill = Ritare.buckettoggle.checked;
 		}));
 
 		// Prepare finish button
